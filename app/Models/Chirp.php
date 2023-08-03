@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Chirp extends Model
 {
+
+    protected $dispatchesEvents = [
+        'created' => ChirpCreated::class,
+    ];
     protected $fillable = [
         'message',
     ];
