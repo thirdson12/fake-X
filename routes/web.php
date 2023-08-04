@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChirpController;
+use App\Http\Controllers\MultiController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -23,6 +24,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::resource('chirps', ChirpController::class)
+    ->only(['index', 'store',"edit","update","destroy"])
+    ->middleware(['auth', 'verified']);
+
+
+    Route::resource('multiphoto', MultiController::class)
     ->only(['index', 'store',"edit","update","destroy"])
     ->middleware(['auth', 'verified']);
 
