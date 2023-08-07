@@ -1,12 +1,34 @@
 <x-app-layout>
+    <style>
+        /* Make the file input invisible */
+        .file-input {
+          display: none;
+        }
+
+        /* Style for the custom upload button */
+        .custom-upload-btn {
+          background-color: #000000;
+          color: white;
+          border: none;
+          padding: 8px 12px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+      </style>
+
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
         <form method="POST" action="{{ route('chirps.store') }}">
             @csrf
-            <textarea
-                name="message"
-                placeholder="{{ __('What\'s on your mind?') }}"
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-            >{{ old('message') }}</textarea>
+            <div style="position: relative;">
+                <textarea
+                    name="message"
+                    placeholder="{{ __('What\'s on your mind?') }}"
+                    class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm pr-10"
+                                    >{{ old('message') }}</textarea>
+                <input type="file" name="photo" class="file-input" id="photo"> <!-- The invisible file input -->
+                <label for="photo" class="custom-upload-btn absolute right-2 bottom-2">Upload</label> <!-- Custom upload button inside the textarea -->
+            </div>
+
             <x-input-error :messages="$errors->get('message')" class="mt-2" />
             <x-primary-button class="mt-4">{{ __('Chirp') }}</x-primary-button>
         </form>
