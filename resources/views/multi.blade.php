@@ -62,15 +62,8 @@
     @if(count($photos) > 0)
         <div>
             @foreach($photos as $photo)
-                @php
-                    $filenames = json_decode($photo->filenames);
-                @endphp
-
-                @if(is_array($filenames))
-                    @foreach($filenames as $filename)
-                        <img src="{{ asset('files/' . $filename) }}" alt="Photo">
-                    @endforeach
-                @endif
+            {{-- {{ dd($photos)}} --}}
+            <img src="{{ asset('files/' . $photo->filenames) }}" alt="Photo">
             @endforeach
         </div>
     @else
